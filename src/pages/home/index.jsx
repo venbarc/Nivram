@@ -1,13 +1,15 @@
-import React from "react";
+import React, { useState } from "react";
 import "./style.scss";
 import Lottie from "lottie-react";
-import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 import body_type_img1 from "../../assets/home/body_type_img1.png";
 import body_type_img2 from "../../assets/home/body_type_img2.png";
 import body_type_img3 from "../../assets/home/body_type_img3.png";
 
 import animation_arrow from "../../assets/home/json/arrow_down.json";
+import animation_weight from "../../assets/home/json/weight.json";
+import animation_height from "../../assets/home/json/height.json";
 
 import age_teen from "../../assets/home/age_teen.jpg";
 import age_young_adult from "../../assets/home/age_young_adult.jpg";
@@ -16,6 +18,10 @@ import age_old from "../../assets/home/age_old.jpg";
 
 import gender_male from "../../assets/home/gender_male.jpg";
 import gender_female from "../../assets/home/gender_female.jpg";
+
+import goal_loose from "../../assets/home/goal_loose.png";
+import goal_gain from "../../assets/home/goal_gain.png";
+import goal_shredded from "../../assets/home/goal_shredded.png";
 
 import Navbar from "../../components/navbar";
 
@@ -26,10 +32,31 @@ const data = [
 ];
 
 const Home = () => {
-  const [body_type, set_body_type] = useState("");
-  const [gender, set_gender] = useState("Male");
-  const [age, set_age] = useState("Teenager");
-  const [specific_age, set_specific_age] = useState("");
+  const [formData, setFormData] = useState({
+    body_type: "",
+    gender: "Male",
+    age: "(13 - 19) - Teenager",
+    goal: "Loose Weight",
+    height: "",
+    weight: "",
+    name: "",
+  });
+
+  const navigate = useNavigate();
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData((prevData) => ({ ...prevData, [name]: value }));
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    // Handle form submission with formData
+    console.log("Form Data:", formData);
+
+    // Redirect to the target page with form data
+    navigate("/personal_details", { state: { formData } });
+  };
 
   return (
     <>
@@ -50,7 +77,7 @@ const Home = () => {
         </div>
       </section>
 
-      <form>
+      <form onSubmit={handleSubmit}>
         {/* what is your body type section  */}
         <section className="mx-[10%] my-[5%] lg:mt-[5%]">
           <p className="text-gray-700 text-[20px] lg:text-[35px] font-bold text-center">
@@ -115,12 +142,13 @@ const Home = () => {
           </div>
           {/* Selection  */}
           <select
-            value={body_type}
-            onChange={(e) => set_body_type(e.target.value)}
+            value={formData.body_type}
+            onChange={handleChange}
             className="mt-16 font tracking-widest bg-slate-300 text-gray-800 py-2 px-4 w-full text-center rounded"
             required
+            name="body_type"
           >
-            <option value="" disabled selected>
+            <option value="" disabled>
               Select Body Type
             </option>
             {data.map((item) => (
@@ -138,20 +166,20 @@ const Home = () => {
             <span className="text-gray-200 underline">Gender </span> ?
           </p>
 
-          <div class="grid grid-cols-2 gap-5 mt-[10%] lg:mt-[3%]">
+          <div className="grid grid-cols-2 gap-5 mt-[10%] lg:mt-[3%]">
             <div className="mx-auto my-auto">
               <input
                 type="radio"
                 name="gender"
                 value="Male"
-                checked={gender === "Male"}
-                onChange={(e) => set_gender(e.target.value)}
-                class="hidden"
+                checked={formData.gender === "Male"}
+                onChange={handleChange}
+                className="hidden"
                 id="gender_1"
               />
               <label
                 className={`flex flex-col p-4 border-2 border-gray-400 cursor-pointer ${
-                  gender === "Male"
+                  formData.gender === "Male"
                     ? "bg-blue-200 text-gray-800"
                     : "text-gray-400"
                 }`}
@@ -160,7 +188,7 @@ const Home = () => {
                 <p className="text-sm lg:text-lg pb-2 text-center font-semibold">
                   Male
                 </p>
-                <div class="px-[15%] mx-auto my-auto">
+                <div className="px-[15%] mx-auto my-auto">
                   <img src={gender_male} />
                 </div>
               </label>
@@ -170,14 +198,14 @@ const Home = () => {
                 type="radio"
                 name="gender"
                 value="Female"
-                checked={gender === "Female"}
-                onChange={(e) => set_gender(e.target.value)}
-                class="hidden"
+                checked={formData.gender === "Female"}
+                onChange={handleChange}
+                className="hidden"
                 id="gender_2"
               />
               <label
                 className={`flex flex-col p-4 border-2 border-gray-400 cursor-pointer ${
-                  gender === "Female"
+                  formData.gender === "Female"
                     ? "bg-blue-200 text-gray-800"
                     : "text-gray-400"
                 }`}
@@ -186,7 +214,7 @@ const Home = () => {
                 <p className="text-sm lg:text-lg pb-2 text-center font-semibold">
                   Female
                 </p>
-                <div class="px-[6%] lg:px-[11%] mx-auto my-auto">
+                <div className="px-[6%] lg:px-[11%] mx-auto my-auto">
                   <img src={gender_female} />
                 </div>
               </label>
@@ -194,11 +222,102 @@ const Home = () => {
           </div>
         </section>
 
-        {/* What is your age section */}
+        {/* What is your goal section */}
         <section className="px-[10%] py-[5%]">
           <p className="text-gray-800 text-[20px] lg:text-[35px] font-bold text-center">
             <span className="text-blue-400">Third</span>, What's your{" "}
-            <span className="text-gray-800 underline">Age </span> ?
+            <span className="text-gray-800 underline">Goal </span> ?
+          </p>
+
+          <div className="py-[5%] lg:py-[0%]">
+            <div className="grid grid-cols-3 lg:grid-cols-3 gap-5 mt-[5%] lg:mt-[3%]">
+              <div className="mx-auto my-auto">
+                <input
+                  type="radio"
+                  name="goal"
+                  value="Loose Weight"
+                  checked={formData.goal === "Loose Weight"}
+                  onChange={handleChange}
+                  className="hidden"
+                  id="goal_1"
+                />
+                <label
+                  className={`flex flex-col p-4 border-2 border-gray-400 cursor-pointer ${
+                    formData.goal === "Loose Weight"
+                      ? "bg-blue-200 text-gray-800"
+                      : "text-gray-400 bg-gray-100"
+                  }`}
+                  htmlFor="goal_1"
+                >
+                  <p className="text-sm lg:text-lg pb-2 text-center font-semibold">
+                    Loose Weight <br />
+                  </p>
+                  <div className="px-[15%] mx-auto my-auto">
+                    <img src={goal_loose} />
+                  </div>
+                </label>
+              </div>
+              <div className="mx-auto my-auto">
+                <input
+                  type="radio"
+                  name="goal"
+                  value="Gain Muscles"
+                  checked={formData.goal === "Gain Muscles"}
+                  onChange={handleChange}
+                  className="hidden"
+                  id="goal_2"
+                />
+                <label
+                  className={`flex flex-col p-4 border-2 border-gray-400 cursor-pointer ${
+                    formData.goal === "Gain Muscles"
+                      ? "bg-blue-200 text-gray-800"
+                      : "text-gray-400 bg-gray-100"
+                  }`}
+                  htmlFor="goal_2"
+                >
+                  <p className="text-sm lg:text-lg pb-2 text-center font-semibold">
+                    Gain Muscles <br />
+                  </p>
+                  <div className="px-[15%] mx-auto my-auto">
+                    <img src={goal_gain} />
+                  </div>
+                </label>
+              </div>
+              <div className="mx-auto my-auto">
+                <input
+                  type="radio"
+                  name="goal"
+                  value="Get Shredded"
+                  checked={formData.goal === "Get Shredded"}
+                  onChange={handleChange}
+                  className="hidden"
+                  id="goal_3"
+                />
+                <label
+                  className={`flex flex-col p-4 border-2 border-gray-400 cursor-pointer ${
+                    formData.goal === "Get Shredded"
+                      ? "bg-blue-200 text-gray-800"
+                      : "text-gray-400 bg-gray-100"
+                  }`}
+                  htmlFor="goal_3"
+                >
+                  <p className="text-sm lg:text-lg pb-2 text-center font-semibold">
+                    Get Shredded <br />
+                  </p>
+                  <div className="px-[15%] mx-auto my-auto">
+                    <img src={goal_shredded} />
+                  </div>
+                </label>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* What is your age section */}
+        <section className="px-[10%] py-[5%]" id="bg__intro__age_section">
+          <p className="text-gray-100 text-[20px] lg:text-[35px] font-bold text-center">
+            <span className="text-blue-400">Forth</span>, What's your{" "}
+            <span className="text-gray-100 underline">Age </span> ?
           </p>
 
           <div className="py-[5%]">
@@ -207,15 +326,15 @@ const Home = () => {
                 <input
                   type="radio"
                   name="age"
-                  value="Teenager"
-                  checked={age === "Teenager"}
-                  onChange={(e) => set_age(e.target.value)}
-                  class="hidden"
+                  value="(13 - 19) - Teenager"
+                  checked={formData.age === "(13 - 19) - Teenager"}
+                  onChange={handleChange}
+                  className="hidden"
                   id="age_1"
                 />
                 <label
                   className={`flex flex-col p-4 border-2 border-gray-400 cursor-pointer ${
-                    age === "Teenager"
+                    formData.age === "(13 - 19) - Teenager"
                       ? "bg-blue-200 text-gray-800"
                       : "text-gray-400"
                   }`}
@@ -225,7 +344,7 @@ const Home = () => {
                     Teenager <br />
                     (13 - 19)
                   </p>
-                  <div class="px-[15%] mx-auto my-auto">
+                  <div className="px-[15%] mx-auto my-auto">
                     <img src={age_teen} />
                   </div>
                 </label>
@@ -234,15 +353,15 @@ const Home = () => {
                 <input
                   type="radio"
                   name="age"
-                  value="Young Adult"
-                  checked={age === "Young Adult"}
-                  onChange={(e) => set_age(e.target.value)}
-                  class="hidden"
+                  value="(20 - 29) - Young Adult"
+                  checked={formData.age === "(20 - 29) - Young Adult"}
+                  onChange={handleChange}
+                  className="hidden"
                   id="age_2"
                 />
                 <label
                   className={`flex flex-col p-4 border-2 border-gray-400 cursor-pointer ${
-                    age === "Young Adult"
+                    formData.age === "(20 - 29) - Young Adult"
                       ? "bg-blue-200 text-gray-800"
                       : "text-gray-400"
                   }`}
@@ -252,7 +371,7 @@ const Home = () => {
                     Young Adult <br />
                     (20 - 29)
                   </p>
-                  <div class="px-[15%] lg:px-[16%] mx-auto my-auto">
+                  <div className="px-[15%] lg:px-[16%] mx-auto my-auto">
                     <img src={age_young_adult} />
                   </div>
                 </label>
@@ -261,15 +380,15 @@ const Home = () => {
                 <input
                   type="radio"
                   name="age"
-                  value="Adult"
-                  checked={age === "Adult"}
-                  onChange={(e) => set_age(e.target.value)}
-                  class="hidden"
+                  value="(30 - 49) - Adult"
+                  checked={formData.age === "(30 - 49) - Adult"}
+                  onChange={handleChange}
+                  className="hidden"
                   id="age_3"
                 />
                 <label
                   className={`flex flex-col p-4 border-2 border-gray-400 cursor-pointer ${
-                    age === "Adult"
+                    formData.age === "(30 - 49) - Adult"
                       ? "bg-blue-200 text-gray-800"
                       : "text-gray-400"
                   }`}
@@ -279,7 +398,7 @@ const Home = () => {
                     Adult <br />
                     (30 - 49)
                   </p>
-                  <div class="px-[15%] lg:px-[12%] mx-auto my-auto">
+                  <div className="px-[15%] lg:px-[12%] mx-auto my-auto">
                     <img src={age_adult} />
                   </div>
                 </label>
@@ -288,15 +407,15 @@ const Home = () => {
                 <input
                   type="radio"
                   name="age"
-                  value="Older Adult"
-                  checked={age === "Older Adult"}
-                  onChange={(e) => set_age(e.target.value)}
-                  class="hidden"
+                  value="(50+) - Older Adult"
+                  checked={formData.age === "(50+) - Older Adult"}
+                  onChange={handleChange}
+                  className="hidden"
                   id="age_4"
                 />
                 <label
                   className={`flex flex-col p-4 border-2 border-gray-400 cursor-pointer ${
-                    age === "Older Adult"
+                    formData.age === "(50+) - Older Adult"
                       ? "bg-blue-200 text-gray-800"
                       : "text-gray-400"
                   }`}
@@ -306,44 +425,141 @@ const Home = () => {
                     Older Adults <br />
                     (50+)
                   </p>
-                  <div class="px-[19%] lg:px-[16%] mx-auto my-auto">
+                  <div className="px-[19%] lg:px-[16%] mx-auto my-auto">
                     <img src={age_old} />
                   </div>
                 </label>
               </div>
             </div>
-            <div className="flex justify-center items-center my-5 border-gray-800 rounded">
-              <input
-                className="mx-5 bg-slate-300 text-center p-2"
-                placeholder="Input your specific Age"
-                type="number"
-                value={specific_age}
-                onChange={(e) => set_specific_age(e.target.value)}
-                required
-              />
+          </div>
+        </section>
+
+        {/* What is your Height and Weight section */}
+        <section className="px-[10%] py-[5%]" id="">
+          <p className="text-gray-800 text-[20px] lg:text-[35px] font-bold text-center">
+            <span className="text-blue-400">Forth</span>, What's your{" "}
+            <span className="text-gray-800 underline">Height & Weight </span> ?
+          </p>
+
+          <div className="py-[5%]">
+            <div className="grid grid-cols-2 gap-5 mt-[5%] lg:mt-[3%]">
+              <div className="mx-auto my-auto">
+                <p className="text-sm lg:text-lg pb-2 text-center font-semibold">
+                  Height <br />
+                </p>
+                <div className="lg:px-[20%] mx-auto my-auto">
+                  <Lottie animationData={animation_height} />
+                </div>
+              </div>
+              <div className="mx-auto my-auto">
+                <p className="text-sm lg:text-lg pb-2 text-center font-semibold">
+                  Weight <br />
+                </p>
+                <div class="mx-auto my-auto">
+                  <Lottie animationData={animation_weight} />
+                </div>
+              </div>
+            </div>
+
+            <div className="grid grid-cols-2 gap-3">
+              <div className="flex justify-center">
+                <input
+                  className="bg-slate-300 p-4 text-center w-full text-sm lg:text-md"
+                  type="number"
+                  placeholder="Input heigh here"
+                  required
+                  name="height"
+                  value={formData.height}
+                  onChange={handleChange}
+                />
+              </div>
+              <div className="flex justify-center">
+                <input
+                  className="bg-slate-300 p-4 text-center w-full text-sm lg:text-md"
+                  type="number"
+                  placeholder="Input weight here in lbs"
+                  required
+                  name="weight"
+                  value={formData.weight}
+                  onChange={handleChange}
+                />
+              </div>
+            </div>
+            <div className="grid grid-cols-2 gap-3 pt-2">
+              <div className="flex justify-center text-blue-500">In cm</div>
+              <div className="flex justify-center text-blue-500">In lbs</div>
             </div>
           </div>
         </section>
 
+        {/* What is your Name */}
+        <section className="px-[10%] pb-[10%]" id="">
+          <p className="pb-5 text-gray-800 text-[20px] lg:text-[35px] font-bold text-center">
+            <span className="text-blue-400">Lastly</span>, What's your{" "}
+            <span className="text-gray-800 underline">Name </span> ?
+          </p>
+          <input
+            className="bg-slate-300 p-4 text-center w-full text-sm lg:text-lg tracking-widest"
+            type="text"
+            placeholder="Your name"
+            required
+            name="name"
+            value={formData.name}
+            onChange={handleChange}
+          />
+        </section>
+
         {/* Details Section  */}
-        {body_type && gender && age && specific_age && (
-          <section className="mx-[10%] my-[10%] lg:mt-[5%]">
-            <p className="text-gray-700 text-[20px] lg:text-[35px] font-bold">
-              Your Personal Details
-            </p>
-            <p>
-              Body Type :{" "}
-              <span className="text-blue-400 text-md">{body_type}</span> <br />
-              Gender : <span className="text-blue-400 text-md">{gender} </span>
-              <br />
-              Age :{" "}
-              <span className="text-blue-400 text-md">
-                {specific_age} years old - ({age}){" "}
-              </span>
-              <br />
-            </p>
-          </section>
-        )}
+        {formData.body_type &&
+          formData.gender &&
+          formData.goal &&
+          formData.age &&
+          formData.height &&
+          formData.weight &&
+          formData.name && (
+            <section className="px-[10%] lg:px-[20%] my-[10%] lg:mt-[5%]">
+              <p className="text-gray-700 text-[20px] lg:text-[35px] font-bold">
+                <span className="text-blue-400">{formData.name}</span> Check
+                Your Details
+              </p>
+              <p>
+                Body Type :{" "}
+                <span className="text-blue-400 text-md">
+                  {formData.body_type}
+                </span>{" "}
+                <br />
+                Gender :{" "}
+                <span className="text-blue-400 text-md">
+                  {formData.gender}{" "}
+                </span>
+                <br />
+                Goal :{" "}
+                <span className="text-blue-400 text-md">{formData.goal} </span>
+                <br />
+                Age :{" "}
+                <span className="text-blue-400 text-md">{formData.age} </span>
+                <br />
+                Height :{" "}
+                <span className="text-blue-400 text-md">
+                  {formData.height} cm{" "}
+                </span>
+                <br />
+                Weight :{" "}
+                <span className="text-blue-400 text-md">
+                  {formData.weight} lbs{" "}
+                </span>
+                <br />
+              </p>
+              <div>
+                <button
+                  className="bg-blue-400 text-gray-100 py-3 px-4 rounded w-full mt-5 hover:bg-blue-300"
+                  type="submit"
+                >
+                  Complete
+                </button>
+              </div>
+            </section>
+          )}
       </form>
     </>
   );
