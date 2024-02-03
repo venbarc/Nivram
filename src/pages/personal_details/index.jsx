@@ -93,12 +93,12 @@ const personal_details = () => {
           Download your details and hit me up to start your fitness journey.
         </div>
         <div className="flex justify-center items-center my-[5%] lg:my-[3%]">
-          <div
+          <button
             className="w-[30%] lg:w-[15%] rounded-full overflow-hidden cursor-pointer"
             onClick={downloadPDF}
           >
             <Lottie animationData={download_details}></Lottie>
-          </div>
+          </button>
         </div>
       </section>
 
