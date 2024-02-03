@@ -29,7 +29,30 @@ const personal_details = () => {
     (item) => item.body_type === formData.body_type
   );
 
+  const chromeLink = "https://nivram.vercel.app/";
+
   const downloadPDF = () => {
+    // Set background color in the PDF content
+    contentElement.classList.add("bg-slate-800");
+
+    // Check if the user is on Instagram or Facebook in-app browser
+    const isInstagramOrFacebook = /Instagram|FBAN/.test(navigator.userAgent);
+
+    if (isInstagramOrFacebook) {
+      // Display a confirmation message with a link to open in Chrome
+      const confirmationMessage =
+        "For the best experience, open the link in Chrome. " +
+        "Click 'OK' to proceed or click the link below:\n\n" +
+        "Open in Chrome: ${chromeLink}";
+
+      const userWantsToOpenInChrome = window.confirm(confirmationMessage);
+
+      if (!userWantsToOpenInChrome) {
+        // User opted not to open in Chrome, handle accordingly
+        return;
+      }
+    }
+
     const contentElement = document.getElementById("pdf-content");
 
     // Set background color in the PDF content
