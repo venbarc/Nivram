@@ -32,6 +32,8 @@ const personal_details = () => {
   const downloadPDF = () => {
     const contentElement = document.getElementById("pdf-content");
 
+    console.log("To Download File use your default browse Like chrome, safari, opera, brave etc.");
+
     // Set background color in the PDF content
     contentElement.classList.add("bg-slate-800");
 
