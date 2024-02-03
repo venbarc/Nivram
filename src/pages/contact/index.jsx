@@ -17,11 +17,11 @@ const Contact = () => {
             Book an appointment
           </p>
 
-          <div className="flex justify-center lg:pt-5 lg:w-[30%] mx-auto">
+          <div className="flex justify-center lg:pt-5 lg:w-[30%] md:w-[45%] mx-auto">
             <Lottie animationData={animation1} />
           </div>
 
-          <div className="flex gap-[30%] lg:gap-[20%] lg:pb-[5%] justify-center text-xs lg:text-sm text-gray-200 py-4">
+          <div className="flex gap-[30%] lg:gap-[20%] lg:pb-[5%] md:gap-[5%] justify-center text-xs lg:text-sm text-gray-200 py-4">
             <div className="py-2">
               Location:{" "}
               <span className="text-blue-100">

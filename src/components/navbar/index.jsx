@@ -12,8 +12,8 @@ const data = [
     to: "/about",
   },
   {
-    label: "OFFER",
-    to: "/offer",
+    label: "SERVICES",
+    to: "/services",
   },
 ];
 

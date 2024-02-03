@@ -33,12 +33,23 @@ const Footer = () => {
               About
             </Link>{" "}
             <br />
-            <Link to="/offer" className="hover:text-blue-200">
-              Offer
+            <Link to="/services" className="hover:text-blue-200">
+              Services
             </Link>
           </span>
         </div>
       </section>
+      <div className="flex justify-center bg-gray-200 text-gray-500 hover:text-blue-500 py-2 text-xs font-light">
+        <p>
+          <a
+            href="https://react-portfolio-gamma-jet.vercel.app/"
+            target="_blank"
+            className=""
+          >
+            developed-by: bndct
+          </a>
+        </p>
+      </div>
     </>
   );
 };

@@ -72,7 +72,7 @@ const Home = () => {
           Your <span className="text-blue-300">journey</span> begins now,{" "}
           <span className="text-blue-300">Start</span> your day one here!
         </p>
-        <div className="w-[11%] md:w-[4%] lg:w-[5%] mt-6 lg:mt-14  h-auto mx-auto">
+        <div className="w-[11%] md:w-[3%] lg:w-[5%] mt-6 lg:mt-14  h-auto mx-auto">
           <Lottie animationData={animation_arrow} />
         </div>
       </section>
@@ -321,7 +321,7 @@ const Home = () => {
           </p>
 
           <div className="py-[5%]">
-            <div class="grid grid-cols-2 lg:grid-cols-4 gap-5 mt-[5%] lg:mt-[3%]">
+            <div className="grid grid-cols-2 lg:grid-cols-4 gap-5 mt-[5%] lg:mt-[3%]">
               <div className="mx-auto my-auto">
                 <input
                   type="radio"
@@ -455,7 +455,7 @@ const Home = () => {
                 <p className="text-sm lg:text-lg pb-2 text-center font-semibold">
                   Weight <br />
                 </p>
-                <div class="mx-auto my-auto">
+                <div className="mx-auto my-auto">
                   <Lottie animationData={animation_weight} />
                 </div>
               </div>

@@ -45,7 +45,7 @@ const personal_details = () => {
   return (
     <>
       {/* opening  section  */}
-      <section className="h-[840px] lg:h-[1000px] mb-4 bg-slate-800">
+      <section className="h-[840px] lg:h-[1000px] md:h-[1020px] mb-4 bg-slate-800">
         {/* Navbar  */}
         <Navbar />
 
