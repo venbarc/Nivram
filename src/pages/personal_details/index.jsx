@@ -37,17 +37,23 @@ const personal_details = () => {
       "etc.  \n Copy this link 'https://nivram.vercel.app/' and paste it in your selected" +
       " browser for the best Experience if you are already using it just press ok!";
 
-    // Display a message with a link to download
-    alert(downloadMessage);
+    // Display a modal-like message with a link to download
+    const userWantsToProceed = window.confirm(downloadMessage);
 
-    // Set background color in the PDF content
-    contentElement.classList.add("bg-slate-800");
+    if (userWantsToProceed) {
+      // User pressed OK, you can proceed with the download logic here
+      const contentElement = document.getElementById("pdf-content");
+      contentElement.classList.add("bg-slate-800");
 
-    html2pdf(contentElement, {
-      filename: `${formData.name}_personal_details.pdf`,
-      margin: 10,
-      jsPDF: { unit: "mm", format: "a4", orientation: "portrait" },
-    });
+      // Set background color in the PDF content
+      contentElement.classList.add("bg-slate-800");
+
+      html2pdf(contentElement, {
+        filename: `${formData.name}_personal_details.pdf`,
+        margin: 10,
+        jsPDF: { unit: "mm", format: "a4", orientation: "portrait" },
+      });
+    }
   };
 
   return (
