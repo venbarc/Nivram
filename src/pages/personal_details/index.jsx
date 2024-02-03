@@ -32,7 +32,13 @@ const personal_details = () => {
   const downloadPDF = () => {
     const contentElement = document.getElementById("pdf-content");
 
-    console.log("To Download File use your default browse Like chrome, safari, opera, brave etc.");
+    const downloadMessage =
+      "To Download File use your default browse Like chrome, safari, opera, brave " +
+      "etc.  \n Copy this link 'https://nivram.vercel.app/' and paste it in your selected" +
+      " browser for the best Experience if you are already using it just press ok!";
+
+    // Display a message with a link to download
+    alert(downloadMessage);
 
     // Set background color in the PDF content
     contentElement.classList.add("bg-slate-800");
