@@ -93,14 +93,21 @@ const Home = () => {
               <div className="grid grid-cols-2 lg:grid-cols-1 gap-6">
                 <img src={body_type_img1} />
                 <p className="text-sm">
-                  * Small “delicate” frame and bone structure <br />
-                  * Classic “hardgainer” <br />
-                  * Flat chest <br />
-                  * Small shoulders <br />
-                  * Thin <br />
-                  * Lean muscle mass <br />
-                  * Finds it hard to gain weight <br />
-                  * Fast metabolism <br />
+                  <span className="text-blue-400 text-md">*</span> Small
+                  “delicate” frame and bone structure <br />
+                  <span className="text-blue-400 text-md">*</span> Classic
+                  “hardgainer” <br />
+                  <span className="text-blue-400 text-md">*</span> Flat chest{" "}
+                  <br />
+                  <span className="text-blue-400 text-md">*</span> Small
+                  shoulders <br />
+                  <span className="text-blue-400 text-md">*</span> Thin <br />
+                  <span className="text-blue-400 text-md">*</span> Lean muscle
+                  mass <br />
+                  <span className="text-blue-400 text-md">*</span> Finds it hard
+                  to gain weight <br />
+                  <span className="text-blue-400 text-md">*</span> Fast
+                  metabolism <br />
                 </p>
               </div>
             </div>
@@ -110,32 +117,46 @@ const Home = () => {
               </p>
               <div className="grid grid-cols-2 lg:grid-cols-1 gap-6">
                 <p className="text-sm">
-                  * Athletic <br />
-                  * Generally hard body <br />
-                  * Well defined muscles <br />
-                  * Rectangular shaped body <br />
-                  * Strong <br />
-                  * Gains muscle easily <br />
-                  * Gains fat more easily than ectomorphs <br />
+                  <span className="text-blue-400 text-md">*</span> Athletic{" "}
+                  <br />
+                  <span className="text-blue-400 text-md">*</span> Generally
+                  hard body <br />
+                  <span className="text-blue-400 text-md">*</span> Well defined
+                  muscles <br />
+                  <span className="text-blue-400 text-md">*</span> Rectangular
+                  shaped body <br />
+                  <span className="text-blue-400 text-md">*</span> Strong <br />
+                  <span className="text-blue-400 text-md">*</span> Gains muscle
+                  easily <br />
+                  <span className="text-blue-400 text-md">*</span> Gains fat
+                  more easily than ectomorphs <br />
                 </p>
                 <img src={body_type_img2} />
               </div>
             </div>
             <div>
-              <p className="text-left lg:text-center text-lg font-semibold mb-10">
+              <p className="text-left lg:text-center text-md font-semibold mb-10">
                 Endomorph Body Type
               </p>
               <div className="grid grid-cols-2 lg:grid-cols-1 gap-6">
                 <img src={body_type_img3} />
                 <p className="text-sm">
-                  * Soft and round body <br />
-                  * Gains muscle and fat very easily <br />
-                  * Is generally short <br />
-                  * "Stocky" build <br />
-                  * Round physique <br />
-                  * Finds it hard to lose fat <br />
-                  * Slow metabolism <br />
-                  * Muscles not so well defined <br />
+                  <span className="text-blue-400 text-md">*</span> Soft and
+                  round body <br />
+                  <span className="text-blue-400 text-md">*</span> Gains muscle
+                  and fat very easily <br />
+                  <span className="text-blue-400 text-md">*</span> Is generally
+                  short <br />
+                  <span className="text-blue-400 text-md">*</span> "Stocky"
+                  build <br />
+                  <span className="text-blue-400 text-md">*</span> Round
+                  physique <br />
+                  <span className="text-blue-400 text-md">*</span> Finds it hard
+                  to lose fat <br />
+                  <span className="text-blue-400 text-md">*</span> Slow
+                  metabolism <br />
+                  <span className="text-blue-400 text-md">*</span> Muscles not
+                  so well defined <br />
                 </p>
               </div>
             </div>
