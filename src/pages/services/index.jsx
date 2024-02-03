@@ -2,7 +2,6 @@ import React from "react";
 import Navbar from "../../components/navbar";
 import Lottie from "lottie-react";
 
-import animation1 from "../../assets/services/json/animation1.json";
 import animation2 from "../../assets/services/json/animation2.json";
 import animation3 from "../../assets/services/json/animation3.json";
 import animation4 from "../../assets/services/json/animation4.json";
@@ -14,7 +13,7 @@ const Services = () => {
   return (
     <>
       {/* opening  section  */}
-      <section className="h-[1150px] lg:h-[1250px] md:h-[1020px] bg-slate-700">
+      <section className="h-[1500px] md:h-[1350px] lg:h-[1550px] bg-slate-700">
         {/* Navbar  */}
         <Navbar />
 
@@ -69,10 +68,7 @@ const Services = () => {
                 fitness goals, and preferences, ensuring a tailored and
                 effective plan to help you reach your desired level of fitness
               </p>
-              <div className="grid grid-cols-3 gap-3">
-                <div className="w-[100%]">
-                  <Lottie animationData={animation1}></Lottie>
-                </div>
+              <div className="grid grid-cols-2 gap-3">
                 <div className="w-[100%]">
                   <Lottie animationData={animation2}></Lottie>
                 </div>
@@ -80,6 +76,19 @@ const Services = () => {
                   <Lottie animationData={animation3}></Lottie>
                 </div>
               </div>
+            </div>
+          </div>
+
+          <div className="flex justify-items-center gap-3 mx-[5%] py-[5%] text-gray-100">
+            <div>
+              <p className="text-lg text-blue-200 mb-2">Budget Friendly</p>
+              <p className="text-sm pb-5">
+                Get fit without breaking the bank! I offer budget-friendly
+                fitness solutions for all levels. Personalized workout and
+                nutrition plans cater to your goals, making it easy on your
+                wallet. Let's make your fitness journey both effective and
+                affordable—where your budget meets your best self!
+              </p>
             </div>
           </div>
         </div>
