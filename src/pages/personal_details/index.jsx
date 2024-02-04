@@ -2,6 +2,7 @@ import React from "react";
 import { useLocation } from "react-router-dom";
 import Lottie from "lottie-react";
 import html2pdf from "html2pdf.js";
+import html2canvas from "html2canvas";
 
 import "./style.scss";
 
@@ -29,13 +30,13 @@ const personal_details = () => {
     (item) => item.body_type === formData.body_type
   );
 
-  const downloadPDF = () => {
+  const downloadImage = () => {
     const contentElement = document.getElementById("pdf-content");
 
     const downloadMessage =
       "To Download File use your default browse Like chrome, safari, opera, brave " +
-      "etc.  \n Copy this link 'https://nivram.vercel.app/' and paste it in your selected" +
-      " browser for the best Experience if you are already using it just press ok!";
+      "etc.  \n " +
+      "for the best Experience if you are already using it just press ok!";
 
     // Display a modal-like message with a link to download
     const userWantsToProceed = window.confirm(downloadMessage);
@@ -48,10 +49,12 @@ const personal_details = () => {
       // Set background color in the PDF content
       contentElement.classList.add("bg-slate-800");
 
-      html2pdf(contentElement, {
-        filename: `${formData.name}_personal_details.pdf`,
-        margin: 10,
-        jsPDF: { unit: "mm", format: "a4", orientation: "portrait" },
+      html2canvas(contentElement).then((canvas) => {
+        const image = canvas.toDataURL("image/png");
+        const link = document.createElement("a");
+        link.href = image;
+        link.download = `${formData.name}_personal_details.png`;
+        link.click();
       });
     }
   };
@@ -109,7 +112,7 @@ const personal_details = () => {
         <div className="flex justify-center items-center my-[5%] lg:my-[3%]">
           <button
             className="w-[30%] lg:w-[15%] rounded-full overflow-hidden cursor-pointer"
-            onClick={downloadPDF}
+            onClick={downloadImage}
           >
             <Lottie animationData={download_details}></Lottie>
           </button>
